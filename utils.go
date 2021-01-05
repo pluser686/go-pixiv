@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-func parseNextPageOffset(s string) (int, error) {
+func parseNextPageOffset(s string) (uint64, error) {
 	if s == "" {
 		return 0, nil
 	}
@@ -19,7 +19,7 @@ func parseNextPageOffset(s string) (int, error) {
 	if err != nil {
 		return 0, fmt.Errorf("parse next_url error: %s {%s}", s, err)
 	}
-	offset, err := strconv.Atoi(m.Get("max_bookmark_id"))
+	offset, err := strconv.ParseUint(m.Get("max_bookmark_id"), 10, 64)
 	if err != nil {
 		return 0, fmt.Errorf("parse next_url error: %s {%s}", s, err)
 	}

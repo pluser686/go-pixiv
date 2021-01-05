@@ -73,7 +73,7 @@ type userIllustsParams struct {
 }
 
 // UserIllusts type: [illust, manga]
-func (a *AppPixivAPI) UserIllusts(uid uint64, _type string, offset int) ([]Illust, int, error) {
+func (a *AppPixivAPI) UserIllusts(uid uint64, _type string, offset int) ([]Illust, uint64, error) {
 	path := "v1/user/illusts"
 	params := &userIllustsParams{
 		UserID: uid,
@@ -93,12 +93,12 @@ type userBookmarkIllustsParams struct {
 	UserID        uint64 `url:"user_id,omitempty"`
 	Restrict      string `url:"restrict,omitempty"`
 	Filter        string `url:"filter,omitempty"`
-	MaxBookmarkID int    `url:"max_bookmark_id,omitempty"`
+	MaxBookmarkID uint64 `url:"max_bookmark_id,omitempty"`
 	Tag           string `url:"tag,omitempty"`
 }
 
 // UserBookmarksIllust restrict: [public, private]
-func (a *AppPixivAPI) UserBookmarksIllust(uid uint64, restrict string, maxBookmarkID int, tag string) ([]Illust, int, error) {
+func (a *AppPixivAPI) UserBookmarksIllust(uid uint64, restrict string, maxBookmarkID uint64, tag string) ([]Illust, uint64, error) {
 	path := "v1/user/bookmarks/illust"
 	params := &userBookmarkIllustsParams{
 		UserID:        uid,
@@ -121,7 +121,7 @@ type illustFollowParams struct {
 }
 
 // IllustFollow restrict: [public, private]
-func (a *AppPixivAPI) IllustFollow(restrict string, offset int) ([]Illust, int, error) {
+func (a *AppPixivAPI) IllustFollow(restrict string, offset int) ([]Illust, uint64, error) {
 	path := "v2/illust/follow"
 	params := &illustFollowParams{
 		Restrict: restrict,
